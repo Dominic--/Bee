@@ -27,7 +27,7 @@ router.get('/', function(req, res) {
   	//res.send('auth...');
 });
 
-
+// re : 4017c1a65270409c94f11c7486f03a32
 router.get('/redirect', function(req, res) {
 	var req_code = req.param('code');
 
@@ -54,13 +54,5 @@ router.get('/redirect', function(req, res) {
 	console.log('auth redirect is active...');
 });
 
-router.get('/authcomplete', function(req, res) {
-	
-	console.log('authcomplete...');
-
-	console.log(req);
-
-	res.send('authcomplete...');
-});
 
 module.exports = router;
