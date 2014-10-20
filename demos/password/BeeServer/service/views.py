@@ -37,10 +37,15 @@ def get(request):
 			errors.append('ssid missing')
 		if not errors:
 			ssid = request.GET['ssid']
-			wifi = WifiInfo.objects.get(ssid=ssid)
-			response_data['ssid'] = wifi.ssid
-			response_data['pswd'] = wifi.pswd
-			return HttpResponse(wifi.pswd)
+			try:
+				wifi = WifiInfo.objects.get(ssid=ssid)
+				response_data['pswd'] = wifi.pswd
+			except:
+				errors.append('ssid wrong')
 		else:
 			response_data['error'] = 'error'
-	return HttpResponse(json.dumps(response_data), content_type="application/json")
+	if not errors:
+		return HttpResponse(response_data['pswd'])
+	else:
+		return HttpResponse('')
+	#return HttpResponse(json.dumps(response_data), content_type="application/json")
